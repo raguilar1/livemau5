@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>COS598C Neuron Identification Leaderboard</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<style>th {cursor:pointer}</style>
+</head>
+
+<body>
+<h1>COS 598C Neuron Identification Leaderboard</h1>
+<table id="myTable" class="table table-striped tablesorter"> 
+<thead> 
+<tr> 
+    <th>Name</th> 
+    <th>Alg Received</th> 
+    <th>F1 Score</th> 
+    <th>Location Precision</th> 
+    <th>Location Recall</th> 
+    <th>Mean Boundary Precision</th>
+    <th>STD Boundary Precision</th>
+    <th>Mean Boundary Recall</th>
+    <th>STD Boundary Recall</th>
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>Noah</td> 
+    <td>4/5/16 15:00</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+</tr>  
+</tbody>
+</table>
+
+<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function() { $("#myTable").tablesorter(); } );
+</script> 
+</body>
+
+</html>
