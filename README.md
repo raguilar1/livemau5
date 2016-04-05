@@ -35,6 +35,6 @@ def classify(data, alpha):
 
 T = TestSet()
 
-for alpha in range(5):
+for alpha in range(1,5):
     print Score(lambda data: classify(data, alpha), test_set=T)
 ```
