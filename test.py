@@ -48,17 +48,18 @@ class Score:
                                mean (pixels in both pred_roi and true_roi) / (pixels in pred_roi)
     self.overlap_bqs      = list of dicts as in self.total_overlap_bq with one dict per image stack                   
     """
-    def __init__(self, prediction_func, test_set=None):
-    	if test_set == None:
-	        test_set = TestSet()
-        self.predictions = prediction_func(test_set.data)
+    def __init__(self, prediction_func, data, actual_labels, predicted_labels=None):
+    	if predicted_labels is None:
+            self.predictions = prediction_func(data)
+        else:
+            self.predictions = predicted_labels
         # assert that predicted and true ROI stacks are the same shape
-        assert(all([self.predictions[i].shape[1] == test_set.labels[i].shape[1] 
-                    for i in range(len(test_set.labels))]))
+        assert(all([self.predictions[i].shape[1] == actual_labels[i].shape[1] 
+                    for i in range(len(actual_labels))]))
         # assert that predicted ROI stacks are 0-1 arrays
         assert(all([np.all(np.logical_or(self.predictions[i] == 1, self.predictions[i] == 0)) 
                     for i in range(len(self.predictions))]))
-        self.categorized = categorize(self.predictions, test_set.labels)
+        self.categorized = categorize(self.predictions, actual_labels)
         self.precisions, self.total_precision, self.recalls, self.total_recall = calc_precision_recall(self.categorized)
         self.f1_scores = map(calc_f1_score, zip(self.precisions, self.recalls))
         self.total_f1_score = calc_f1_score((self.total_precision, self.total_recall))
