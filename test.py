@@ -112,10 +112,10 @@ def calc_precision_recall(categorized):
     num_fps = [len(categorized[i]["fps"]) for i in range(len(categorized))]
     num_fns = [len(categorized[i]["fns"]) for i in range(len(categorized))]
     num_pairs = [len(categorized[i]["tps"]) for i in range(len(categorized))]
-    precisions = [num_pairs[i] / float(num_pairs[i] + num_fps[i]) for i in range(len(categorized))]
-    recalls = [num_pairs[i] / float(num_pairs[i] + num_fns[i]) for i in range(len(categorized))]
-    total_precision = sum(num_pairs) / float(sum(num_pairs) + sum(num_fps))
-    total_recall = sum(num_pairs) / float(sum(num_pairs) + sum(num_fns))
+    precisions = [num_pairs[i] / float(num_pairs[i] + num_fps[i]) if num_pairs[i] + num_fps[i] != 0 else 0 for i in range(len(categorized))]
+    recalls = [num_pairs[i] / float(num_pairs[i] + num_fns[i]) if num_pairs[i] + num_fns[i] != 0 else 0 for i in range(len(categorized))]
+    total_precision = sum(num_pairs) / float(sum(num_pairs) + sum(num_fps)) if sum(num_pairs) + sum(num_fps) != 0 else 0
+    total_recall = sum(num_pairs) / float(sum(num_pairs) + sum(num_fns)) if sum(num_pairs) + sum(num_fns) != 0 else 0
     return precisions, total_precision, recalls, total_recall
     
 def calc_overlap(roi_pred, roi_true):
